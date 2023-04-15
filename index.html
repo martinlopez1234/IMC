@@ -10,27 +10,63 @@
 
     <title>IMC</title>
   </head>
-  <body>
-    <h1>calculadora IMC</h1>
-    <p>Por favor, introduce dos números:</p>
-    <div class="row">
+  <body >
+
+<div class="container mt-5">
+  <h1 class="text-center">Calculadora IMC Adulto</h1>
+  <p class="text-center">Por favor, introduce dos números:</p>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
       <div class="form-group">
-      <div class="col-md-4">
-     
-    <input id="altura" placeholder="ingrese altura"> 
-  </div><br>
-  <div class="col-md-4">
-    <input placeholder="ingrese peso" id="peso">
-    <button type="button" onclick="myFunction()">calcular</button>
+        <input id="altura" class="form-control" placeholder="Ingrese altura">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input id="peso" class="form-control" placeholder="Ingrese peso">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn btn-primary" onclick="ImcA()">Calcular</button>
+    </div>
   </div>
-    <p id="imc"></p>
-    <p id="rango"></p>
+  <p id="imc" class="text-center mt-3"></p>
+  <p id="rango" class="text-center"></p>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center">Calculadora IMC Adulto Mayor</h1>
+  <p class="text-center">Por favor, introduce dos números:</p>
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="form-group">
+        <input id="alturaM" class="form-control" placeholder="Ingrese altura">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <input id="pesoM" class="form-control" placeholder="Ingrese peso">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn btn-primary" onclick="ImcM()">Calcular</button>
+    </div>
   </div>
+  <p id="imcM" class="text-center mt-3"></p>
+  <p id="rangoM" class="text-center"></p>
 </div>
 
 
+  
+<footer class="g-light py-3 text-center mt-5 bg-dark text-white fixed-bottom">
+
+  <p>Hecho por Martín López</p>
+
+</footer>
+
+
     <script>
-      function myFunction() {
+      function ImcA() {
         var peso, alt, imc;
         peso = document.getElementById("peso").value;
         alt = document.getElementById("altura").value;
@@ -47,14 +83,50 @@
           document.getElementById("rango").innerHTML = "Obesidad grado 1";
         } else if (imc >= 25) {
           document.getElementById("rango").innerHTML = "Su peso es sobrepeso";
-        } else {
+        } else if(peso === "" && alt === ""){
+          document.getElementById("rango").innerHTML = "No se calcula";
+
+        }else {
           document.getElementById("rango").innerHTML = "Su peso es adecuado";
         }
-  
-  
-        document.getElementById("imc").innerHTML = imc;
+
+        if(peso === "" && alt === ""){
+          alert("no ingreses campos vacios");
+        }else{
+          document.getElementById("imc").innerHTML = "Su IMC es: " + imc;
       }
+    }
+
+    function ImcM() {
+        var peso, alt, imc;
+        peso = document.getElementById("pesoM").value;
+        alt = document.getElementById("alturaM").value;
   
+        imc = peso / (alt * alt);
+        if (imc < 23.0) {
+          document.getElementById("rangoM").innerHTML = "enflaquecido";
+  
+        } else if (imc >= 32.0) {
+          document.getElementById("rangoM").innerHTML = "Obesidad";
+        } else if (imc >= 28.0) {
+          document.getElementById("rangoM").innerHTML = "sobrepeso";
+        } else if (imc >= 30) {
+          document.getElementById("rangoM").innerHTML = "Obesidad grado 1";
+          
+        }else if(peso === "" && alt === ""){
+          document.getElementById("rangoM").innerHTML = "No se calcula";
+
+        }else {
+          document.getElementById("rangoM").innerHTML = "normal";
+        }
+
+        if(peso === "" && alt === ""){
+          alert("no ingreses campos vacios");
+        }else{
+          document.getElementById("imcM").innerHTML = "Su IMC es: " + imc;
+      }
+    }
+   
   
     </script>
      <!-- Optional JavaScript; choose one of the two! -->
