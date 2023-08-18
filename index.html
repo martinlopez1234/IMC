@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -14,138 +15,152 @@
 </head>
 
 <body>
-
-  <div class="container mt-5">
-    <h1 class="text-center">Calculadora IMC Adulto</h1>
-    <p class="text-center">Por favor, introduce dos números (utilice puntos, no comas):</p>
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <input id="altura" class="form-control" placeholder="Ingrese altura">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <input id="peso" class="form-control" placeholder="Ingrese peso">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <button type="button" class="btn btn-primary" onclick="ImcA()">Calcular</button>
-      </div>
-    </div>
-    <p id="imc" class="text-center mt-3"></p>
-    <p id="rango" class="text-center"></p>
-  </div>
-
-  <div class="container mt-5">
-    <h1 class="text-center">Calculadora IMC Adulto Mayor</h1>
-    <p class="text-center">Por favor, introduce dos números (utilice puntos, no comas):</p>
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <input id="alturaM" class="form-control" placeholder="Ingrese altura">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <input id="pesoM" class="form-control" placeholder="Ingrese peso">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <button type="button" class="btn btn-primary" onclick="ImcM()">Calcular</button>
-      </div>
-    </div>
-    <p id="imcM" class="text-center mt-3"></p>
-    <p id="rangoM" class="text-center"></p>
-  </div>
-
-
-
-  <footer class="g-light py-3 text-center mt-5 bg-dark text-white fixed-bottom">
-
-    <p>Hecho por Martín López</p>
-
-  </footer>
-
-
-  <script>
-    function ImcA() {
-      var peso, alt, imc;
-      peso = document.getElementById("peso").value;
-      alt = document.getElementById("altura").value;
-
-      imc = peso / (alt * alt);
-      if (imc < 18.5) {
-        document.getElementById("rango").innerHTML = "Su Peso es Bajo" + " " + "<br> <strong>IMC < 18.5 = Bajo Peso</strong>";
-
-      } else if (imc >= 40) {
-        document.getElementById("rango").innerHTML = "Obesidad grado 3" + " " + "<br> <strong>IMC >= 40 = Obesidad grado 3</strong>";
-      } else if (imc >= 35) {
-        document.getElementById("rango").innerHTML = "Obesidad grado 2" + " " + "<br> <strong>IMC 35 - 39.9 = Obesidad grado 2</strong>";
-      } else if (imc >= 30) {
-        document.getElementById("rango").innerHTML = "Obesidad grado 1" + " " + "<br> <strong>IMC 30 - 34.9 = Obesidad grado 1</strong>";
-      } else if (imc >= 25) {
-        document.getElementById("rango").innerHTML = "Sobrepeso" + " " + "<br> <strong>IMC 25 - 29.9 = Sobrepeso</strong>";
-      } else if (peso === "" && alt === "") {
-        document.getElementById("rango").innerHTML = "No se calcula";
-
-      } else {
-        document.getElementById("rango").innerHTML = "Su Peso es Adecuado" + " " + "<br> <strong>IMC 18.5 - 24.9 = Adecuado</strong>";
-      }
-
-      if (peso === "" && alt === "") {
-        alert("no ingreses campos vacios");
-      } else {
-        document.getElementById("imc").innerHTML = "Su IMC es: " + imc;
-      }
+  <style>
+    /* Definir el color $blue-500 como una clase personalizada */
+    .blue-500 {
+      background-color: #3498db;
+      color: #fff;
+      transition: background-color 0.3s ease;
+      /* Transición suave para el cambio de color de fondo */
     }
 
-    function ImcM() {
-      var peso, alt, imc;
-      peso = document.getElementById("pesoM").value;
-      alt = document.getElementById("alturaM").value;
-
-      imc = peso / (alt * alt);
-      if (imc < 23.0) {
-        document.getElementById("rangoM").innerHTML = "Enflaquecido" + " " + "<br> <strong>IMC < 23 = Enflaquecido</strong>";
-        ;
-
-      } else if (imc >= 32.0) {
-        document.getElementById("rangoM").innerHTML = "Obesidad" + " " + "<br> <strong>IMC >= 32 = Obesidad</strong>";
-      } else if (imc >= 28.0) {
-        document.getElementById("rangoM").innerHTML = "Sobrepeso" + " " + "<br> <strong>IMC 28 - 31.9 = Sobrepeso</strong>";
-
-
-      } else if (peso === "" && alt === "") {
-        document.getElementById("rangoM").innerHTML = "No se calcula";
-
-      } else {
-        document.getElementById("rangoM").innerHTML = "Normal" + " " + "<br> <strong>IMC 23 - 27.9 = Normal</strong>";
-      }
-
-      if (peso === "" && alt === "") {
-        alert("no ingreses campos vacios");
-      } else {
-        document.getElementById("imcM").innerHTML = "Su IMC es: " + imc;
-      }
+    /* Estilo para oscurecer el fondo al pasar el cursor */
+    .blue-500:hover {
+      background-color: #3498dbca;
+      /* Cambia el color de fondo al pasar el cursor */
     }
+  </style>
+  <div class="container mt-5">
+    <h1 class="text-center">Calculadoras IMC</h1>
+
+    <ul class="nav nav-tabs mt-3">
+      <li class="nav-item">
+        <a class="nav-link active" id="adult-tab" data-bs-toggle="tab" href="#adult" role="tab" aria-controls="adult"
+          aria-selected="true">Adulto</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="adult-mayor-tab" data-bs-toggle="tab" href="#adult-mayor" role="tab"
+          aria-controls="adult-mayor" aria-selected="false">Adulto Mayor</a>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3">
+      <div class="tab-pane fade show active" id="adult" role="tabpanel" aria-labelledby="adult-tab">
+
+        <p class="text-center">Por favor, introduce dos números (utilice puntos, no comas):</p>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="form-group">
+              <input id="altura" class="form-control" placeholder="Ingrese altura">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input id="peso" class="form-control" placeholder="Ingrese peso">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn blue-500 text-white" onclick="ImcA()">Calcular</button>
+          </div>
+        </div>
+        <p id="imc" class="text-center mt-3"></p>
+        <p id="rango" class="text-center"></p>
+      </div>
+
+      <div class="tab-pane fade" id="adult-mayor" role="tabpanel" aria-labelledby="adult-mayor-tab">
+        <p class="text-center">Por favor, introduce dos números (utilice puntos, no comas):</p>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="form-group">
+              <input id="alturaM" class="form-control" placeholder="Ingrese altura">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input id="pesoM" class="form-control" placeholder="Ingrese peso">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-success" onclick="ImcM()">Calcular</button>
+          </div>
+        </div>
+        <p id="imcM" class="text-center mt-3"></p>
+        <p id="rangoM" class="text-center"></p>
+      </div>
+    </div>
+
+    <footer class="g-light py-3 text-center mt-5 bg-dark text-white fixed-bottom">
+      <p>Hecho por Martín López</p>
+    </footer>
+
+    <script>
+      function ImcA() {
+        var peso, alt, imc;
+        peso = document.getElementById("peso").value;
+        alt = document.getElementById("altura").value;
+
+        imc = peso / (alt * alt);
+        if (imc < 18.5) {
+          document.getElementById("rango").innerHTML = "Su Peso es Bajo" + " " + "<br> <strong>IMC < 18.5 = Bajo Peso</strong>";
+
+        } else if (imc >= 40) {
+          document.getElementById("rango").innerHTML = "Obesidad grado 3" + " " + "<br> <strong>IMC >= 40 = Obesidad grado 3</strong>";
+        } else if (imc >= 35) {
+          document.getElementById("rango").innerHTML = "Obesidad grado 2" + " " + "<br> <strong>IMC 35 - 39.9 = Obesidad grado 2</strong>";
+        } else if (imc >= 30) {
+          document.getElementById("rango").innerHTML = "Obesidad grado 1" + " " + "<br> <strong>IMC 30 - 34.9 = Obesidad grado 1</strong>";
+        } else if (imc >= 25) {
+          document.getElementById("rango").innerHTML = "Sobrepeso" + " " + "<br> <strong>IMC 25 - 29.9 = Sobrepeso</strong>";
+        } else if (peso === "" && alt === "") {
+          document.getElementById("rango").innerHTML = "No se calcula";
+
+        } else {
+          document.getElementById("rango").innerHTML = "Su Peso es Adecuado" + " " + "<br> <strong>IMC 18.5 - 24.9 = Adecuado</strong>";
+        }
+
+        if (peso === "" && alt === "") {
+          alert("no ingreses campos vacios");
+        } else {
+          document.getElementById("imc").innerHTML = "Su IMC es: " + imc;
+        }
+      }
+
+      function ImcM() {
+        var peso, alt, imc;
+        peso = document.getElementById("pesoM").value;
+        alt = document.getElementById("alturaM").value;
+
+        imc = peso / (alt * alt);
+        if (imc < 23.0) {
+          document.getElementById("rangoM").innerHTML = "Enflaquecido" + " " + "<br> <strong>IMC < 23 = Enflaquecido</strong>";
+          ;
+
+        } else if (imc >= 32.0) {
+          document.getElementById("rangoM").innerHTML = "Obesidad" + " " + "<br> <strong>IMC >= 32 = Obesidad</strong>";
+        } else if (imc >= 28.0) {
+          document.getElementById("rangoM").innerHTML = "Sobrepeso" + " " + "<br> <strong>IMC 28 - 31.9 = Sobrepeso</strong>";
 
 
-  </script>
-  <!-- Optional JavaScript; choose one of the two! -->
+        } else if (peso === "" && alt === "") {
+          document.getElementById("rangoM").innerHTML = "No se calcula";
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+        } else {
+          document.getElementById("rangoM").innerHTML = "Normal" + " " + "<br> <strong>IMC 23 - 27.9 = Normal</strong>";
+        }
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
+        if (peso === "" && alt === "") {
+          alert("no ingreses campos vacios");
+        } else {
+          document.getElementById("imcM").innerHTML = "Su IMC es: " + imc;
+        }
+      }
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"></script>
 </body>
-
-
 
 </html>
